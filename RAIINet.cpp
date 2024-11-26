@@ -7,9 +7,9 @@
 #include <utility>
 
 RAIINet::RAIINet(std::shared_ptr<Board> board) : board_{board} {
-  auto p1 = players[Player::PlayerId::P1] =
+  players[Player::PlayerId::P1] =
       std::make_shared<Player>(Player::PlayerId::P1);
-  auto p2 = players[Player::PlayerId::P2] =
+  players[Player::PlayerId::P2] =
       std::make_shared<Player>(Player::PlayerId::P2);
 }
 
@@ -75,9 +75,9 @@ void RAIINet::setup(int argc, char **argv) {
 }
 
 /* Assumes l1 is the link that initiated the battle. */
-void RAIINet::linkBattle(std::shared_ptr<Link> l1, std::shared_ptr<Link> l2) {
+bool RAIINet::linkBattle(std::shared_ptr<Link> l1, std::shared_ptr<Link> l2) {
   if (l1->getPlayer()->getPlayerId() == l2->getPlayer()->getPlayerId()) {
-    return; // Maybe throw error in future
+    return false; // Maybe throw error in future
   }
   if (l1->getStrength() >= l2->getStrength()) {
     auto p1 = l1->getPlayer();
@@ -88,14 +88,17 @@ void RAIINet::linkBattle(std::shared_ptr<Link> l1, std::shared_ptr<Link> l2) {
     p2->addDownload(l1);
     l1->setDownloaded();
   }
+  return true;
 }
 
-void RAIINet::serverDownload(std::shared_ptr<Link> link,
+bool RAIINet::serverDownload(std::shared_ptr<Link> link,
                              std::shared_ptr<ServerPort> server) {
   if (link->getPlayer()->getPlayerId() != server->getPlayer()->getPlayerId()) {
-    link->getPlayer()->addDownload(link);
+    server->getPlayer()->addDownload(link);
     link->setDownloaded();
+    return true;
   }
+  return false;
 }
 
 void RAIINet::linkSetup(Player::PlayerId pid, const std::string &linkFile) {
@@ -167,9 +170,11 @@ void RAIINet::moveLink(char linkChar, char dir) {
     return; // Throw error in future
   } else if (auto cell = board_->getCell(r, c)) {
     if (auto otherLink = std::dynamic_pointer_cast<Link>(cell)) {
-      RAIINet::linkBattle(link, otherLink);
+      if (!RAIINet::linkBattle(link, otherLink))
+        return;
     } else if (auto serverLink = std::dynamic_pointer_cast<ServerPort>(cell)) {
-      RAIINet::serverDownload(link, serverLink);
+      if (!RAIINet::serverDownload(link, serverLink))
+        return;
     }
   }
   link->setRow(r);

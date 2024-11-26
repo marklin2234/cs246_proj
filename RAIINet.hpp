@@ -20,8 +20,8 @@ private:
       players;
 
   std::pair<int, int> directionToVector(char dir) const;
-  void linkBattle(std::shared_ptr<Link> l1, std::shared_ptr<Link> l2);
-  void serverDownload(std::shared_ptr<Link> link,
+  bool linkBattle(std::shared_ptr<Link> l1, std::shared_ptr<Link> l2);
+  bool serverDownload(std::shared_ptr<Link> link,
                       std::shared_ptr<ServerPort> server);
   void linkSetup(Player::PlayerId player, const std::string &linkFile);
   void printPlayerInfo(Player::PlayerId player) const;
