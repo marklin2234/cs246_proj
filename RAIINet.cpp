@@ -1,7 +1,8 @@
 #include "RAIINet.hpp"
 #include "board.hpp"
-#include "link.hpp"
+#include "data.hpp"
 #include "serverPort.hpp"
+#include "virus.hpp"
 #include <fstream>
 #include <memory>
 #include <utility>
@@ -36,19 +37,6 @@ void RAIINet::displayBoard() const {
 
 void RAIINet::endGame() {}
 
-std::pair<int, int> RAIINet::directionToVector(char dir) const {
-  switch (dir) {
-  case 'u':
-    return {-1, 0};
-  case 'd':
-    return {1, 0};
-  case 'l':
-    return {0, -1};
-  default:
-    return {0, 1};
-  }
-}
-
 void RAIINet::setup(int argc, char **argv) {
   std::string command;
   std::string abilityOrder1 = "LFDSP", abilityOrder2 = "LFDSP";
@@ -75,31 +63,6 @@ void RAIINet::setup(int argc, char **argv) {
 }
 
 /* Assumes l1 is the link that initiated the battle. */
-bool RAIINet::linkBattle(std::shared_ptr<Link> l1, std::shared_ptr<Link> l2) {
-  if (l1->getPlayer()->getPlayerId() == l2->getPlayer()->getPlayerId()) {
-    return false; // Maybe throw error in future
-  }
-  if (l1->getStrength() >= l2->getStrength()) {
-    auto p1 = l1->getPlayer();
-    p1->addDownload(l2);
-    l2->setDownloaded();
-  } else {
-    auto p2 = l2->getPlayer();
-    p2->addDownload(l1);
-    l1->setDownloaded();
-  }
-  return true;
-}
-
-bool RAIINet::serverDownload(std::shared_ptr<Link> link,
-                             std::shared_ptr<ServerPort> server) {
-  if (link->getPlayer()->getPlayerId() != server->getPlayer()->getPlayerId()) {
-    server->getPlayer()->addDownload(link);
-    link->setDownloaded();
-    return true;
-  }
-  return false;
-}
 
 void RAIINet::linkSetup(Player::PlayerId pid, const std::string &linkFile) {
   std::ifstream file(linkFile.c_str());
@@ -116,11 +79,14 @@ void RAIINet::linkSetup(Player::PlayerId pid, const std::string &linkFile) {
   std::string linkInfo;
   int i = 0;
   while (file >> linkInfo) {
-    Link::LinkType type =
-        linkInfo[0] == 'V' ? Link::LinkType::Virus : Link::LinkType::Data;
     int strength = linkInfo[1] - '0';
-    board_ = links[linkChars[i]] = std::make_shared<Link>(
-        board_, player, linkPos[i].first, linkPos[i].second, strength, type);
+    if (linkInfo[0] == 'V') {
+      board_ = links[linkChars[i]] = std::make_shared<Virus>(
+          board_, player, linkPos[i].first, linkPos[i].second, strength);
+    } else {
+      board_ = links[linkChars[i]] = std::make_shared<Data>(
+          board_, player, linkPos[i].first, linkPos[i].second, strength);
+    }
     i++;
   }
 }
@@ -134,7 +100,7 @@ void RAIINet::printPlayerInfo(Player::PlayerId pid) const {
     if (i != 0) {
       out << ", ";
     }
-    out << c->getType() << c->getStrength();
+    out << c->displayChar() << c->getStrength();
     i++;
   }
   out << "\n";
@@ -143,7 +109,8 @@ void RAIINet::printPlayerInfo(Player::PlayerId pid) const {
   i = 0;
   // TODO: Hide P2/P1 depending on perspective
   for (const auto c : player->getLinkChars()) {
-    out << c << ": " << links.at(c)->getType() << links.at(c)->getStrength();
+    out << c << ": " << links.at(c)->displayChar()
+        << links.at(c)->getStrength();
     out << ((i == 3) ? "\n" : " ");
     i++;
   }
@@ -151,32 +118,5 @@ void RAIINet::printPlayerInfo(Player::PlayerId pid) const {
 }
 
 void RAIINet::moveLink(char linkChar, char dir) {
-  auto d = directionToVector(dir);
-  std::shared_ptr<Link> link = links[linkChar];
-  if (link->getDownloaded()) {
-    return; // Throw error in future
-  }
-
-  int r = link->getRow() + d.first, c = link->getCol() + d.second;
-
-  if (r < 0 && link->getPlayer()->getPlayerId() == Player::PlayerId::P2) {
-    players[Player::PlayerId::P1]->addDownload(link);
-    link->setDownloaded();
-  } else if (r >= nrows &&
-             link->getPlayer()->getPlayerId() == Player::PlayerId::P1) {
-    players[Player::PlayerId::P2]->addDownload(link);
-    link->setDownloaded();
-  } else if (r < 0 || r >= nrows || c < 0 || c >= ncols) {
-    return; // Throw error in future
-  } else if (auto cell = board_->getCell(r, c)) {
-    if (auto otherLink = std::dynamic_pointer_cast<Link>(cell)) {
-      if (!RAIINet::linkBattle(link, otherLink))
-        return;
-    } else if (auto serverLink = std::dynamic_pointer_cast<ServerPort>(cell)) {
-      if (!RAIINet::serverDownload(link, serverLink))
-        return;
-    }
-  }
-  link->setRow(r);
-  link->setCol(c);
+  links[linkChar]->moveLink(dir, board_, nrows, ncols);
 }
