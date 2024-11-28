@@ -25,6 +25,10 @@ private:
                       const std::string &linkFile);
   void linkSetup(PlayerId player, const std::vector<std::string> &order);
   void abilitySetup(PlayerId player, const std::string &order = "LFDSP");
+  bool parseAbilityInput(std::shared_ptr<AbilityParams> &abilityParams,
+                         const std::vector<std::string> &params,
+                         const std::vector<std::unique_ptr<Ability>> &abilities,
+                         const int N);
   void endTurn();
   void endGame();
 

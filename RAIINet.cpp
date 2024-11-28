@@ -143,9 +143,113 @@ void RAIINet::moveLink(char linkChar, char dir) {
   }
 }
 
+bool RAIINet::parseAbilityInput(
+    std::shared_ptr<AbilityParams> &abilityParams,
+    const std::vector<std::string> &params,
+    const std::vector<std::unique_ptr<Ability>> &abilities, const int N) {
+  if (dynamic_cast<LinkBoostAbility *>(abilities[N].get())) {
+    if (params.size() != 1) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    char linkChar = params[0][0];
+    if (links.find(linkChar) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams = std::make_shared<LinkBoostAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<FirewallAbility *>(abilities[N].get())) {
+    if (params.size() != 2) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    try {
+      int row = stoi(params[0]), col = stoi(params[1]);
+
+      if (row < 0 || row >= nrows || col < 0 || col >= ncols) {
+        std::cout << "Error. Coordinates out of bounds.\n";
+        return false;
+      }
+      abilityParams = std::make_shared<FirewallAbilityParams>(row, col, board_,
+                                                              players[turn]);
+    } catch (std::exception &err) {
+      std::cout << "Error. Invalid number.\n";
+    }
+  } else if (dynamic_cast<DownloadAbility *>(abilities[N].get())) {
+    if (params.size() != 1) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    char linkChar = params[0][0];
+    if (links.find(linkChar) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams = std::make_shared<DownloadAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<PolarizeAbility *>(abilities[N].get())) {
+    if (params.size() != 1) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    char linkChar = params[0][0];
+    if (links.find(linkChar) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams = std::make_shared<PolarizeAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<ScanAbility *>(abilities[N].get())) {
+    if (params.size() != 1) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    char linkChar = params[0][0];
+    if (links.find(linkChar) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams = std::make_shared<ScanAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<SwapAbility *>(abilities[N].get())) {
+    if (params.size() != 2) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    char linkChar1 = params[0][0], linkChar2 = params[1][0];
+    if (links.find(linkChar1) == links.end() ||
+        links.find(linkChar2) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams =
+        std::make_shared<SwapAbilityParams>(links[linkChar1], links[linkChar2]);
+  } else if (dynamic_cast<LinkHideAbility *>(abilities[N].get())) {
+    if (params.size() != 1) {
+      std::cout << "Error. Invalid input.\n";
+      return false;
+    }
+    char linkChar = params[0][0];
+    if (links.find(linkChar) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams = std::make_shared<LinkHideAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<LinkCleanseAbility *>(abilities[N].get())) {
+    char linkChar = params[0][0];
+    if (links.find(linkChar) == links.end()) {
+      std::cout << "Error. Link not found.\n";
+      return false;
+    }
+    abilityParams = std::make_shared<LinkCleanseAbilityParams>(links[linkChar]);
+  }
+  return true;
+}
+
 void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   auto &player = players[turn];
   auto &abilities = player.getAbilities();
+  if (N < 1 || N > 6) {
+    std::cout << "Error. Invalid input.\n";
+    return;
+  }
   N--;
 
   if (abilityUsed) {
@@ -158,35 +262,10 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   }
 
   std::shared_ptr<AbilityParams> abilityParams;
-
-  // TODO: Add bad input handling
-  if (dynamic_cast<LinkBoostAbility *>(abilities[N].get())) {
-    char linkChar = params[0][0];
-    abilityParams = std::make_shared<LinkBoostAbilityParams>(links[linkChar]);
-  } else if (dynamic_cast<FirewallAbility *>(abilities[N].get())) {
-    int row = stoi(params[0]), col = stoi(params[1]);
-    abilityParams = std::make_shared<FirewallAbilityParams>(row, col, board_,
-                                                            players[turn]);
-  } else if (dynamic_cast<DownloadAbility *>(abilities[N].get())) {
-    char linkChar = params[0][0];
-    abilityParams = std::make_shared<DownloadAbilityParams>(links[linkChar]);
-  } else if (dynamic_cast<PolarizeAbility *>(abilities[N].get())) {
-    char linkChar = params[0][0];
-    abilityParams = std::make_shared<PolarizeAbilityParams>(links[linkChar]);
-  } else if (dynamic_cast<ScanAbility *>(abilities[N].get())) {
-    char linkChar = params[0][0];
-    abilityParams = std::make_shared<ScanAbilityParams>(links[linkChar]);
-  } else if (dynamic_cast<SwapAbility *>(abilities[N].get())) {
-    char linkChar1 = params[0][0], linkChar2 = params[1][0];
-    abilityParams =
-        std::make_shared<SwapAbilityParams>(links[linkChar1], links[linkChar2]);
-  } else if (dynamic_cast<LinkHideAbility *>(abilities[N].get())) {
-    char linkChar = params[0][0];
-    abilityParams = std::make_shared<LinkHideAbilityParams>(links[linkChar]);
-  } else if (dynamic_cast<LinkCleanseAbility *>(abilities[N].get())) {
-    char linkChar = params[0][0];
-    abilityParams = std::make_shared<LinkCleanseAbilityParams>(links[linkChar]);
+  if (!parseAbilityInput(abilityParams, params, abilities, N)) {
+    return;
   }
+
   if (abilities[N]->use(abilityParams)) {
     abilities[N]->setUsed();
     player.useAbility();
