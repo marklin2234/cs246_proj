@@ -7,8 +7,7 @@ protected:
   bool battle(std::shared_ptr<Link> o) override;
 
 public:
-  explicit Virus(std::shared_ptr<Board> board, std::shared_ptr<Player> player,
-                 int row, int col, int strength);
-
-  std::string displayChar() const override;
+  explicit Virus(std::shared_ptr<Board> board, Player &player, int row, int col,
+                 int strength, char linkChar);
+  char typeChar() const override;
 };

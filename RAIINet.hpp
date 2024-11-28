@@ -9,18 +9,19 @@ class Board;
 
 class RAIINet {
 private:
-  int nrows = 8, ncols = 8;
+  int nrows = 8, ncols = 8, numPlayers = 2;
+  PlayerId turn = PlayerId::P1;
   std::shared_ptr<Board> board_;
   std::ostream &out = std::cout;
 
   std::unordered_map<char, std::shared_ptr<Link>> links;
-  std::unordered_map<Player::PlayerId, std::shared_ptr<Player>,
-                     Player::PlayerHash>
-      players;
+  std::unordered_map<PlayerId, Player, PlayerHash> players;
 
   std::pair<int, int> directionToVector(char dir) const;
-  void linkSetup(Player::PlayerId player, const std::string &linkFile);
-  void printPlayerInfo(Player::PlayerId player) const;
+  void linkSetup(PlayerId player, const std::string &linkFile);
+  void abilitySetup(PlayerId player, const std::string &order = "LFDSP");
+  void printPlayerInfo(PlayerId player) const;
+  void endTurn();
 
 public:
   explicit RAIINet(std::shared_ptr<Board> board);
@@ -28,4 +29,6 @@ public:
   void setup(int argc, char **argv);
   void endGame();
   void moveLink(char linkChar, char dir);
+  void useAbility(int N, const std::vector<std::string> &params);
+  void displayAbilities() const;
 };

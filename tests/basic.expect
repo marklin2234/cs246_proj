@@ -1,120 +1,154 @@
 Player 1:
-Downloaded: 
-Abilities: 
+Downloaded: 1D, 0V
+Abilities: 2
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
-.VVSSDDD
-...VD...
+.bcSSfgh
+...de...
 ........
 ........
-D.......
+a.......
 ........
-...DV...
-.DDSSVVV
+...DE...
+.BCSSFGH
 ========
 Player 2:
-Downloaded: V1
-Abilities: 
+Downloaded: 0D, 0V
+Abilities: 2
 A: D1 B: D2 C: D3 D: D4
 E: V1 F: V2 G: V3 H: V4 
 Player 1:
-Downloaded: D1
-Abilities: 
+Downloaded: 1D, 0V
+Abilities: 2
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
-..VSSDDD
-...VD...
+.bcSSfgh
+...de...
 ........
 ........
-V.......
 ........
-...DV...
-.DDSSVVV
+.B......
+...DE...
+..CSSFGH
 ========
 Player 2:
-Downloaded: V1
-Abilities: 
+Downloaded: 0D, 1V
+Abilities: 2
 A: D1 B: D2 C: D3 D: D4
 E: V1 F: V2 G: V3 H: V4 
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
 Player 1:
-Downloaded: D1
-Abilities: 
+Downloaded: 1D, 0V
+Abilities: 2
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
-..VSSDDD
-...VD...
+.bcSSfgh
+...de...
 ........
 ........
-D.......
+.B......
 ........
-...DV...
-..DSSVVV
+...DE...
+..CSSFGH
 ========
 Player 2:
-Downloaded: V1, V2
-Abilities: 
+Downloaded: 0D, 1V
+Abilities: 2
 A: D1 B: D2 C: D3 D: D4
 E: V1 F: V2 G: V3 H: V4 
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
 Player 1:
-Downloaded: D1
-Abilities: 
+Downloaded: 1D, 0V
+Abilities: 2
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
-..VSSDDD
-...VD...
+.bcSSfg.
+...de..h
 ........
 ........
-D.......
+.B......
 ........
-...DV...
-..DSSVVV
+...DE...
+..CSSFGH
 ========
 Player 2:
-Downloaded: V1, V2
-Abilities: 
+Downloaded: 0D, 1V
+Abilities: 2
 A: D1 B: D2 C: D3 D: D4
 E: V1 F: V2 G: V3 H: V4 
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
 Player 1:
-Downloaded: D1
-Abilities: 
+Downloaded: 1D, 0V
+Abilities: 2
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
-..VSSDDD
-...VD...
+.bcSSfg.
+...de.h.
+........
+.B......
 ........
 ........
-D.......
-........
-...DV...
-..DSSVVV
+...DE...
+..CSSFGH
 ========
 Player 2:
-Downloaded: V1, V2
-Abilities: 
+Downloaded: 0D, 1V
+Abilities: 2
 A: D1 B: D2 C: D3 D: D4
 E: V1 F: V2 G: V3 H: V4 
+Error: Trying to move onto own link.
+Error: Trying to move onto own link.
+Error: Trying to move onto own link.
+Error: Trying to move onto own link.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error. Not your link, or already downloaded.
+Error: Trying to move onto own link.
 Player 1:
-Downloaded: D1, V4
-Abilities: 
+Downloaded: 1D, 0V
+Abilities: 2
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
-..VSS...
-...VD...
+..cSSfg.
+...de.h.
 ........
 ........
-D.......
 ........
-...DV...
-..DSSVV.
+........
+..CDE...
+...SSFGH
 ========
 Player 2:
-Downloaded: V1, V2, D4, D3, D2
-Abilities: 
+Downloaded: 1D, 2V
+Abilities: 2
 A: D1 B: D2 C: D3 D: D4
 E: V1 F: V2 G: V3 H: V4 

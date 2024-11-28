@@ -2,8 +2,8 @@
 #include "boardDecorator.hpp"
 #include <memory>
 
-ServerPort::ServerPort(std::shared_ptr<Board> board,
-                       std::shared_ptr<Player> player, int row, int col)
+ServerPort::ServerPort(std::shared_ptr<Board> board, Player &player, int row,
+                       int col)
     : BoardDecorator{board, player}, row_{row}, col_{col} {}
 
 std::shared_ptr<Board> ServerPort::getCell(int row, int col) {
@@ -13,4 +13,9 @@ std::shared_ptr<Board> ServerPort::getCell(int row, int col) {
   return board_->getCell(row, col);
 }
 
-std::string ServerPort::displayChar() const { return "S"; }
+std::optional<std::shared_ptr<Firewall>> ServerPort::getFirewall(int row,
+                                                                 int col) {
+  return board_->getFirewall(row, col);
+}
+
+char ServerPort::displayChar() const { return 'S'; }

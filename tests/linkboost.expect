@@ -1,0 +1,66 @@
+LA LA FA 
+LU LA FA 
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+.bcSSfgh
+...de...
+a.......
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+LA FA 
+LU FA 
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 5
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+.bcSSfgh
+...de...
+a.......
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+LU LA FA 
+Error. Ability already used.
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 5
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+.bcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 1D, 0V
+Abilities: 5
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 

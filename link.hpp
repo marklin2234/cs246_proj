@@ -8,20 +8,22 @@
 class Link : public BoardDecorator {
 protected:
   int row_, col_, strength_;
+  char linkChar_;
   bool isDownloaded_;
+  bool isBoosted_;
 
   std::pair<int, int> directionToVector(char dir) const;
   virtual bool battle(std::shared_ptr<Link> o) = 0;
   bool serverDownload(std::shared_ptr<ServerPort> server);
 
 public:
-  explicit Link(std::shared_ptr<Board> board, std::shared_ptr<Player> player,
-                int row, int col, int strength);
-  std::shared_ptr<Board> getCell(int row, int col) override;
-  virtual std::string displayChar() const override = 0;
+  explicit Link(std::shared_ptr<Board> board, Player &player, int row, int col,
+                int strength, char linkChar);
   virtual ~Link();
+  std::shared_ptr<Board> getCell(int row, int col) override;
+  char displayChar() const override;
+  virtual char typeChar() const = 0;
 
-  /* Assume this link is initiating the battle. */
   int getStrength() const;
   int getRow() const;
   int getCol() const;
@@ -30,6 +32,7 @@ public:
   void setRow(int row);
   void setCol(int col);
   void setDownloaded();
+  void setIsBoosted();
 
   void moveLink(char dir, std::shared_ptr<Board> board, int nrows, int ncols);
 };

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <sstream>
 
 void run(std::istream &in, RAIINet &game);
 
@@ -24,9 +25,18 @@ void run(std::istream &in, RAIINet &game) {
 
       game.moveLink(link, direction);
     } else if (command == "abilities") {
-
+      game.displayAbilities();
     } else if (command == "ability") {
-
+      int N;
+      std::vector<std::string> params;
+      in >> N;
+      std::string param;
+      std::getline(in, param);
+      std::stringstream ss(param);
+      while (ss >> param) {
+        params.emplace_back(param);
+      }
+      game.useAbility(N, params);
     } else if (command == "board") {
       game.displayBoard();
     } else if (command == "sequence") {
