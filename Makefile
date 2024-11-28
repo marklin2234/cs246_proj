@@ -9,7 +9,7 @@ OBJS = $(patsubst %.cpp, %.o,$(SOURCES))
 all: $(TARGET) 
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lX11
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

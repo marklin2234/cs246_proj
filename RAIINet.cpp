@@ -17,25 +17,11 @@ RAIINet::RAIINet(std::shared_ptr<Board> board) : board_{board} {
   players[PlayerId::P2] = Player(PlayerId::P2);
 }
 
-void RAIINet::displayBoard() const {
-  int i = 0, j;
-  printPlayerInfo(PlayerId::P1);
-  for (i = 0; i < ncols; i++) {
-    out << "=";
-  }
-  out << "\n";
-  for (i = 0; i < nrows; i++) {
-    for (j = 0; j < ncols; j++) {
-      auto cell = board_->getCell(i, j);
-      out << cell->displayChar();
-    }
-    out << "\n";
-  }
-  for (i = 0; i < ncols; i++) {
-    out << "=";
-  }
-  out << "\n";
-  printPlayerInfo(PlayerId::P2);
+void RAIINet::displayBoard() const { notifyObservers(); }
+
+char RAIINet::getState(int row, int col) const {
+  auto cell = board_->getCell(row, col);
+  return cell->displayChar();
 }
 
 void RAIINet::endGame() {}
@@ -115,31 +101,6 @@ void RAIINet::abilitySetup(PlayerId pid, const std::string &order) {
   for (const auto c : order) {
     player.addAbility(c);
   }
-}
-
-void RAIINet::printPlayerInfo(PlayerId pid) const {
-  const auto &player = players.at(pid);
-  const auto &seenLinks = players.at(turn).getSeen();
-  out << "Player " << static_cast<int>(pid) + 1 << ":\n";
-  out << "Downloaded: " << std::to_string(player.getNumDataDownloaded())
-      << "D, " << std::to_string(player.getNumVirusDownloaded()) << "V";
-  out << "\n";
-  out << "Abilities: " << player.getNumAbilities();
-  out << "\n";
-  int i = 0;
-  // TODO: Hide P2/P1 depending on perspective
-  for (const auto c : player.getLinkChars()) {
-    out << c << ": ";
-    if (player.getPlayerId() == turn ||
-        std::find(seenLinks.begin(), seenLinks.end(), c) != seenLinks.end()) {
-      out << links.at(c)->typeChar() << links.at(c)->getStrength();
-    } else {
-      out << "?";
-    }
-    out << ((i == 3) ? "\n" : " ");
-    i++;
-  }
-  out << "\n";
 }
 
 void RAIINet::endTurn() {
