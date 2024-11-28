@@ -1,1 +1,5 @@
 tests/basic
+tests/linkboost
+tests/firewall
+tests/download
+

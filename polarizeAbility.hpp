@@ -1,10 +1,10 @@
 #pragma once
 
-#include "ability.hpp"
+#include "player.hpp"
 
-class LinkBoostAbility : public Ability {
+class PolarizeAbility : public Ability {
 public:
-  LinkBoostAbility(Player &player);
+  PolarizeAbility(Player &player);
   void use(const std::shared_ptr<AbilityParams> params) override;
   char displayChar() const override;
 };

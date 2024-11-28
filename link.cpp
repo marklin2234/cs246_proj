@@ -1,7 +1,6 @@
 #include "link.hpp"
 #include "boardDecorator.hpp"
 #include "firewall.hpp"
-#include "virus.hpp"
 #include <iostream>
 
 std::pair<int, int> Link::directionToVector(char dir) const {
@@ -18,6 +17,22 @@ std::pair<int, int> Link::directionToVector(char dir) const {
   return {0, 0};
 }
 
+bool Link::battle(std::shared_ptr<Link> o) {
+  if (getPlayer().getPlayerId() == o->getPlayer().getPlayerId()) {
+    return false; // Maybe throw error in future
+  }
+  if (getStrength() >= o->getStrength()) {
+    auto &p1 = getPlayer();
+    p1.addDownload(o);
+    o->setDownloaded();
+  } else {
+    auto &p2 = o->getPlayer();
+    p2.addDownload(std::dynamic_pointer_cast<Link>(shared_from_this()));
+    setDownloaded();
+  }
+  return true;
+}
+
 bool Link::serverDownload(std::shared_ptr<ServerPort> server) {
   if (getPlayer().getPlayerId() != server->getPlayer().getPlayerId()) {
     server->getPlayer().addDownload(
@@ -29,11 +44,15 @@ bool Link::serverDownload(std::shared_ptr<ServerPort> server) {
 }
 
 Link::Link(std::shared_ptr<Board> board, Player &player, int row, int col,
-           int strength, char linkChar)
+           int strength, char linkType, char linkChar)
     : BoardDecorator(board, player), row_{row}, col_{col}, strength_{strength},
-      linkChar_{linkChar}, isDownloaded_{false}, isBoosted_{false} {}
-
-Link::~Link() {}
+      linkChar_{linkChar}, isDownloaded_{false}, isBoosted_{false} {
+  if (linkType == 'V') {
+    type_ = LinkType::Virus;
+  } else if (linkType == 'D') {
+    type_ = LinkType::Data;
+  }
+}
 
 std::shared_ptr<Board> Link::getCell(int row, int col) {
   if (!isDownloaded_ && row == row_ && col == col_) {
@@ -45,6 +64,15 @@ std::shared_ptr<Board> Link::getCell(int row, int col) {
 
 char Link::displayChar() const { return linkChar_; }
 
+char Link::typeChar() const {
+  if (type_ == LinkType::Virus) {
+    return 'V';
+  } else if (type_ == LinkType::Data) {
+    return 'D';
+  }
+  return '?';
+}
+
 int Link::getStrength() const { return strength_; }
 int Link::getRow() const { return row_; }
 int Link::getCol() const { return col_; }
@@ -54,6 +82,8 @@ void Link::setRow(int row) { row_ = row; }
 void Link::setCol(int col) { col_ = col; }
 void Link::setDownloaded() { isDownloaded_ = true; }
 void Link::setIsBoosted() { isBoosted_ = true; }
+LinkType Link::getLinkType() const { return type_; }
+void Link::setLinkType(LinkType linkType) { type_ = linkType; }
 
 void Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
                     int ncols) {
@@ -80,7 +110,7 @@ void Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
     if (player.getPlayerId() != getPlayer().getPlayerId()) {
       player.addSeen(std::static_pointer_cast<Link>(shared_from_this()));
 
-      if (std::dynamic_pointer_cast<Virus>(shared_from_this())) {
+      if (type_ == LinkType::Virus) {
         getPlayer().addDownload(
             std::static_pointer_cast<Link>(shared_from_this()));
       }

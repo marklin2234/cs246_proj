@@ -28,3 +28,9 @@ public:
   std::shared_ptr<Link> link_;
   DownloadAbilityParams(std::shared_ptr<Link> link);
 };
+
+class PolarizeAbilityParams : public AbilityParams {
+public:
+  std::shared_ptr<Link> link_;
+  PolarizeAbilityParams(std::shared_ptr<Link> link);
+};

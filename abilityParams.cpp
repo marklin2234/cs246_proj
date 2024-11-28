@@ -12,3 +12,6 @@ FirewallAbilityParams::FirewallAbilityParams(int row, int col,
 
 DownloadAbilityParams::DownloadAbilityParams(std::shared_ptr<Link> link)
     : link_{link} {}
+
+PolarizeAbilityParams::PolarizeAbilityParams(std::shared_ptr<Link> link)
+    : link_{link} {}

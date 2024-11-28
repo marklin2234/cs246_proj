@@ -3,6 +3,7 @@
 #include "firewallAbility.hpp"
 #include "link.hpp"
 #include "linkBoostAbility.hpp"
+#include "polarizeAbility.hpp"
 
 Player::Player(PlayerId id) : id_{id} {
   if (id == PlayerId::P1) {
@@ -51,6 +52,8 @@ void Player::addAbility(char c) {
   case 'D':
     abilities.emplace_back(std::make_unique<DownloadAbility>(*this));
     break;
+  case 'P':
+    abilities.emplace_back(std::make_unique<PolarizeAbility>(*this));
   }
 }
 

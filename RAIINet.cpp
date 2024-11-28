@@ -1,12 +1,11 @@
 #include "RAIINet.hpp"
 #include "abilityParams.hpp"
 #include "board.hpp"
-#include "data.hpp"
 #include "downloadAbility.hpp"
 #include "firewallAbility.hpp"
 #include "linkBoostAbility.hpp"
+#include "polarizeAbility.hpp"
 #include "serverPort.hpp"
-#include "virus.hpp"
 #include <fstream>
 #include <memory>
 #include <utility>
@@ -87,15 +86,9 @@ void RAIINet::linkSetup(PlayerId pid, const std::string &linkFile) {
   int i = 0;
   while (file >> linkInfo) {
     int strength = linkInfo[1] - '0';
-    if (linkInfo[0] == 'V') {
-      board_ = links[linkChars[i]] =
-          std::make_shared<Virus>(board_, player, linkPos[i].first,
-                                  linkPos[i].second, strength, linkChars[i]);
-    } else {
-      board_ = links[linkChars[i]] =
-          std::make_shared<Data>(board_, player, linkPos[i].first,
-                                 linkPos[i].second, strength, linkChars[i]);
-    }
+    board_ = links[linkChars[i]] = std::make_shared<Link>(
+        board_, player, linkPos[i].first, linkPos[i].second, strength,
+        linkInfo[0], linkChars[i]);
     i++;
   }
 }
@@ -159,6 +152,7 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
 
   std::shared_ptr<AbilityParams> abilityParams;
 
+  // TODO: Add bad input handling
   if (dynamic_cast<LinkBoostAbility *>(abilities[N].get())) {
     char linkChar = params[0][0];
     abilityParams = std::make_shared<LinkBoostAbilityParams>(links[linkChar]);
@@ -169,6 +163,9 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   } else if (dynamic_cast<DownloadAbility *>(abilities[N].get())) {
     char linkChar = params[0][0];
     abilityParams = std::make_shared<DownloadAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<PolarizeAbility *>(abilities[N].get())) {
+    char linkChar = params[0][0];
+    abilityParams = std::make_shared<PolarizeAbilityParams>(links[linkChar]);
   }
   abilities[N]->use(abilityParams);
   abilities[N]->setUsed();
