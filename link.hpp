@@ -17,6 +17,7 @@ private:
   char linkChar_;
   bool isDownloaded_;
   bool isBoosted_;
+  bool isHidden_;
 
   std::pair<int, int> directionToVector(char dir) const;
   bool battle(std::shared_ptr<Link> o);
@@ -37,7 +38,9 @@ public:
   void setRow(int row);
   void setCol(int col);
   void setDownloaded();
+  bool getIsHidden() const;
   void setIsBoosted();
+  void setIsHidden();
   LinkType getLinkType() const;
   void setLinkType(LinkType linkType);
 

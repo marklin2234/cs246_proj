@@ -22,3 +22,6 @@ ScanAbilityParams::ScanAbilityParams(std::shared_ptr<Link> link)
 SwapAbilityParams::SwapAbilityParams(std::shared_ptr<Link> link1,
                                      std::shared_ptr<Link> link2)
     : link1_{link1}, link2_{link2} {}
+
+LinkHideAbilityParams::LinkHideAbilityParams(std::shared_ptr<Link> link)
+    : link_{link} {}

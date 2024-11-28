@@ -46,3 +46,9 @@ public:
   std::shared_ptr<Link> link1_, link2_;
   SwapAbilityParams(std::shared_ptr<Link> link1, std::shared_ptr<Link> link2);
 };
+
+class LinkHideAbilityParams : public AbilityParams {
+public:
+  std::shared_ptr<Link> link_;
+  LinkHideAbilityParams(std::shared_ptr<Link> link);
+};

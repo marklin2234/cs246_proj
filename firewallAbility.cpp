@@ -14,7 +14,7 @@ bool FirewallAbility::use(const std::shared_ptr<AbilityParams> params) {
 
   if (board->getCell(row, col)->displayChar() != '.') {
     std::cout << "Error. Cannot place firewall on non-empty cell.\n";
-    return false; // TODO: Throw error (non-empty cell)
+    return false;
   }
 
   board = std::make_shared<Firewall>(board, player, row, col);

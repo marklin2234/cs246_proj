@@ -4,6 +4,7 @@
 #include "downloadAbility.hpp"
 #include "firewallAbility.hpp"
 #include "linkBoostAbility.hpp"
+#include "linkHideAbility.hpp"
 #include "polarizeAbility.hpp"
 #include "scanAbility.hpp"
 #include "serverPort.hpp"
@@ -152,7 +153,7 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   }
   if (abilities[N]->isUsed()) {
     std::cout << "Error. Ability already used.\n";
-    return; // TODO: add error (ability already used)
+    return;
   }
 
   std::shared_ptr<AbilityParams> abilityParams;
@@ -178,6 +179,9 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
     char linkChar1 = params[0][0], linkChar2 = params[1][0];
     abilityParams =
         std::make_shared<SwapAbilityParams>(links[linkChar1], links[linkChar2]);
+  } else if (dynamic_cast<LinkHideAbility *>(abilities[N].get())) {
+    char linkChar = params[0][0];
+    abilityParams = std::make_shared<LinkHideAbilityParams>(links[linkChar]);
   }
   if (abilities[N]->use(abilityParams)) {
     abilities[N]->setUsed();

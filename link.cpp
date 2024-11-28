@@ -23,8 +23,12 @@ bool Link::battle(std::shared_ptr<Link> o) {
   }
   auto &p1 = getPlayer();
   auto &p2 = o->getPlayer();
-  p1.addSeen(o->displayChar());
-  p2.addSeen(displayChar());
+  if (!o->getIsHidden()) {
+    p1.addSeen(o->displayChar());
+  }
+  if (!getIsHidden()) {
+    p2.addSeen(displayChar());
+  }
   if (getStrength() >= o->getStrength()) {
     p1.addDownload(o);
   } else {
@@ -81,7 +85,9 @@ void Link::setStrength(int strength) { strength_ = strength; }
 void Link::setRow(int row) { row_ = row; }
 void Link::setCol(int col) { col_ = col; }
 void Link::setDownloaded() { isDownloaded_ = true; }
+bool Link::getIsHidden() const { return isHidden_; }
 void Link::setIsBoosted() { isBoosted_ = true; }
+void Link::setIsHidden() { isHidden_ = true; }
 LinkType Link::getLinkType() const { return type_; }
 void Link::setLinkType(LinkType linkType) { type_ = linkType; }
 
@@ -110,7 +116,9 @@ bool Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
   if (auto firewall = board->getFirewall(r, c)) {
     auto &player = firewall->get()->getPlayer();
     if (player.getPlayerId() != getPlayer().getPlayerId()) {
-      player.addSeen(displayChar());
+      if (!getIsHidden()) {
+        player.addSeen(displayChar());
+      }
 
       if (type_ == LinkType::Virus) {
         getPlayer().addDownload(

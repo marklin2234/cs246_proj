@@ -1,0 +1,18 @@
+abilities
+ability 1 A
+ability 1 a
+move a d
+abilities
+ability 3 1 1
+move A u
+ability 1 b
+ability 2 b
+move a d
+move A u
+move a d
+move A u
+move b d
+move A u
+move b d
+move c d
+
