@@ -1,0 +1,185 @@
+HA HA FA DA PA 
+Error. Must link hide own link.
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: ? b: ? c: ? d: ?
+e: ? f: ? g: ? h: ? 
+========
+.bcSSfgh
+a..de...
+........
+........
+........
+........
+...DE...
+ABCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 5
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+HA HA FA DA PA 
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 4
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+.bcSSfgh
+aW.de...
+........
+........
+........
+........
+A..DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: ? B: ? C: ? D: ?
+E: ? F: ? G: ? H: ? 
+Error. Ability already used.
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 3
+a: ? b: ? c: ? d: ?
+e: ? f: ? g: ? h: ? 
+========
+.bcSSfgh
+.W.de...
+a.......
+........
+........
+........
+A..DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 3
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+.bcSSfgh
+.W.de...
+a.......
+........
+........
+A.......
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: ? B: ? C: ? D: ?
+E: ? F: ? G: ? H: ? 
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 3
+a: ? b: ? c: ? d: ?
+e: ? f: ? g: ? h: ? 
+========
+.bcSSfgh
+.W.de...
+........
+a.......
+........
+A.......
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+Player 1:
+Downloaded: 0D, 0V
+Abilities: 3
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+.bcSSfgh
+.W.de...
+........
+a.......
+A.......
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: ? B: ? C: ? D: ?
+E: ? F: ? G: ? H: ? 
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 3
+a: ? b: ? c: ? d: ?
+e: ? f: ? g: ? h: ? 
+========
+..cSSfgh
+.W.de...
+........
+a.......
+A.......
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 0V
+Abilities: 4
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 3
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+..cSSfgh
+.W.de...
+........
+A.......
+........
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 1V
+Abilities: 4
+A: D1 B: ? C: ? D: ?
+E: ? F: ? G: ? H: ? 
+Error. Not your link, or already downloaded.
+Player 1:
+Downloaded: 0D, 1V
+Abilities: 3
+a: ? b: ? c: ? d: ?
+e: ? f: ? g: ? h: ? 
+========
+...SSfgh
+.Wcde...
+........
+A.......
+........
+........
+...DE...
+.BCSSFGH
+========
+Player 2:
+Downloaded: 0D, 1V
+Abilities: 4
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 

@@ -86,8 +86,8 @@ void Link::setRow(int row) { row_ = row; }
 void Link::setCol(int col) { col_ = col; }
 void Link::setDownloaded() { isDownloaded_ = true; }
 bool Link::getIsHidden() const { return isHidden_; }
-void Link::setIsBoosted() { isBoosted_ = true; }
-void Link::setIsHidden() { isHidden_ = true; }
+void Link::setIsBoosted(bool status) { isBoosted_ = status; }
+void Link::setIsHidden(bool status) { isHidden_ = status; }
 LinkType Link::getLinkType() const { return type_; }
 void Link::setLinkType(LinkType linkType) { type_ = linkType; }
 

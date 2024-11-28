@@ -3,6 +3,7 @@
 #include "firewallAbility.hpp"
 #include "link.hpp"
 #include "linkBoostAbility.hpp"
+#include "linkCleanseAbility.hpp"
 #include "linkHideAbility.hpp"
 #include "polarizeAbility.hpp"
 #include "scanAbility.hpp"
@@ -66,6 +67,9 @@ void Player::addAbility(char c) {
     break;
   case 'H':
     abilities.emplace_back(std::make_unique<LinkHideAbility>(*this));
+    break;
+  case 'E':
+    abilities.emplace_back(std::make_unique<LinkCleanseAbility>(*this));
     break;
   }
 }

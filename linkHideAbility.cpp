@@ -13,6 +13,6 @@ bool LinkHideAbility::use(const std::shared_ptr<AbilityParams> params) {
     std::cout << "Error. Must link hide own link.\n";
     return false;
   }
-  link->setIsHidden();
+  link->setIsHidden(true);
   return true;
 }

@@ -4,6 +4,7 @@
 #include "downloadAbility.hpp"
 #include "firewallAbility.hpp"
 #include "linkBoostAbility.hpp"
+#include "linkCleanseAbility.hpp"
 #include "linkHideAbility.hpp"
 #include "polarizeAbility.hpp"
 #include "scanAbility.hpp"
@@ -182,6 +183,9 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   } else if (dynamic_cast<LinkHideAbility *>(abilities[N].get())) {
     char linkChar = params[0][0];
     abilityParams = std::make_shared<LinkHideAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<LinkCleanseAbility *>(abilities[N].get())) {
+    char linkChar = params[0][0];
+    abilityParams = std::make_shared<LinkCleanseAbilityParams>(links[linkChar]);
   }
   if (abilities[N]->use(abilityParams)) {
     abilities[N]->setUsed();

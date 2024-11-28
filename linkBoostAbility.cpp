@@ -13,6 +13,6 @@ bool LinkBoostAbility::use(const std::shared_ptr<AbilityParams> params) {
     std::cout << "Error. Must link boost own link.\n";
     return false;
   }
-  link->setIsBoosted();
+  link->setIsBoosted(true);
   return true;
 }

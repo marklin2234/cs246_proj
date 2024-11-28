@@ -52,3 +52,9 @@ public:
   std::shared_ptr<Link> link_;
   LinkHideAbilityParams(std::shared_ptr<Link> link);
 };
+
+class LinkCleanseAbilityParams : public AbilityParams {
+public:
+  std::shared_ptr<Link> link_;
+  LinkCleanseAbilityParams(std::shared_ptr<Link> link);
+};

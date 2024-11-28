@@ -39,8 +39,8 @@ public:
   void setCol(int col);
   void setDownloaded();
   bool getIsHidden() const;
-  void setIsBoosted();
-  void setIsHidden();
+  void setIsBoosted(bool status);
+  void setIsHidden(bool status);
   LinkType getLinkType() const;
   void setLinkType(LinkType linkType);
 

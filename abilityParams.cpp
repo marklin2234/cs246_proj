@@ -25,3 +25,6 @@ SwapAbilityParams::SwapAbilityParams(std::shared_ptr<Link> link1,
 
 LinkHideAbilityParams::LinkHideAbilityParams(std::shared_ptr<Link> link)
     : link_{link} {}
+
+LinkCleanseAbilityParams::LinkCleanseAbilityParams(std::shared_ptr<Link> link)
+    : link_{link} {}
