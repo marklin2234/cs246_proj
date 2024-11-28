@@ -19,16 +19,16 @@ std::pair<int, int> Link::directionToVector(char dir) const {
 
 bool Link::battle(std::shared_ptr<Link> o) {
   if (getPlayer().getPlayerId() == o->getPlayer().getPlayerId()) {
-    return false; // Maybe throw error in future
+    return false;
   }
+  auto &p1 = getPlayer();
+  auto &p2 = o->getPlayer();
+  p1.addSeen(o->displayChar());
+  p2.addSeen(displayChar());
   if (getStrength() >= o->getStrength()) {
-    auto &p1 = getPlayer();
     p1.addDownload(o);
-    o->setDownloaded();
   } else {
-    auto &p2 = o->getPlayer();
     p2.addDownload(std::dynamic_pointer_cast<Link>(shared_from_this()));
-    setDownloaded();
   }
   return true;
 }
@@ -85,11 +85,12 @@ void Link::setIsBoosted() { isBoosted_ = true; }
 LinkType Link::getLinkType() const { return type_; }
 void Link::setLinkType(LinkType linkType) { type_ = linkType; }
 
-void Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
+bool Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
                     int ncols) {
   auto d = directionToVector(dir);
   if (getDownloaded()) {
-    return; // TODO: Throw error (Already downloaded)
+    std::cout << "Error. Link already downloaded.\n";
+    return false;
   }
   if (isBoosted_) {
     d.first *= 2;
@@ -98,14 +99,15 @@ void Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
 
   int r = getRow() + d.first, c = getCol() + d.second;
 
-  if (r < 0 && getPlayer().getPlayerId() == PlayerId::P2) {
+  if ((r < 0 && getPlayer().getPlayerId() == PlayerId::P2) ||
+      (r >= nrows && getPlayer().getPlayerId() == PlayerId::P1)) {
     getPlayer().addDownload(std::static_pointer_cast<Link>(shared_from_this()));
-  } else if (r >= nrows && getPlayer().getPlayerId() == PlayerId::P1) {
-    getPlayer().addDownload(std::static_pointer_cast<Link>(shared_from_this()));
+    return true;
   } else if (r < 0 || r >= nrows || c < 0 || c >= ncols) {
     std::cout << "Error. Trying to move out of bounds.\n";
-    return; // TODO: Throw error (OOB exception)
-  } else if (auto firewall = board->getFirewall(r, c)) {
+    return false;
+  }
+  if (auto firewall = board->getFirewall(r, c)) {
     auto &player = firewall->get()->getPlayer();
     if (player.getPlayerId() != getPlayer().getPlayerId()) {
       player.addSeen(displayChar());
@@ -115,19 +117,21 @@ void Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
             std::static_pointer_cast<Link>(shared_from_this()));
       }
     }
-  } else if (auto cell = board->getCell(r, c)) {
+  }
+  if (auto cell = board->getCell(r, c); cell && !getDownloaded()) {
     if (auto otherLink = std::dynamic_pointer_cast<Link>(cell)) {
       if (!battle(otherLink)) {
         std::cout << "Error: Trying to move onto own link.\n";
-        return; // TODO: Throw error (trying to move onto own link)
+        return false;
       }
     } else if (auto serverLink = std::dynamic_pointer_cast<ServerPort>(cell)) {
       if (!serverDownload(serverLink)) {
         std::cout << "Error: Trying to move onto own server.\n";
-        return; // TODO: Throw error (trying to move onto own server)
+        return false;
       }
     }
   }
   setRow(r);
   setCol(c);
+  return true;
 }

@@ -242,7 +242,7 @@ Player 1:
 Downloaded: 0D, 1V
 Abilities: 5
 a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+e: ? f: ? g: ? h: D4 
 ========
 abcSSfg.
 A..de...
@@ -276,13 +276,13 @@ AbcSSfg.
 Player 2:
 Downloaded: 0D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: ? G: ? H: V4 
 Player 1:
 Downloaded: 0D, 2V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 AbcSSfg.
 ...de...
@@ -316,13 +316,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 1D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: ? G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSfg.
 ...de...
@@ -357,13 +357,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 1D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSfg.
 ...de...
@@ -397,13 +397,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSf..
 ...de.g.
@@ -437,13 +437,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSf..
 ...de...
@@ -477,13 +477,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSf..
 ...de...
@@ -517,13 +517,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSf..
 ...de...
@@ -557,13 +557,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 1V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: ? C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: ? c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .bcSSf..
 .B.de...
@@ -597,13 +597,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 2V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: D2 C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: V2 c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 .B.SSf..
 ..cde...
@@ -637,13 +637,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 2V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: D2 C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 0D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: V2 c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 ..BSSf..
 ..cde...
@@ -677,13 +677,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 2V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: D2 C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 1D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: V2 c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 ...SSf..
 ..cde...
@@ -719,13 +719,13 @@ e: D1 f: D2 g: D3 h: D4
 Player 2:
 Downloaded: 2D, 2V
 Abilities: 5
-A: ? B: ? C: ? D: ?
-E: ? F: ? G: ? H: ? 
+A: D1 B: D2 C: ? D: ?
+E: ? F: V2 G: V3 H: V4 
 Player 1:
 Downloaded: 2D, 3V
 Abilities: 5
-a: ? b: ? c: ? d: ?
-e: ? f: ? g: ? h: ? 
+a: V1 b: V2 c: ? d: ?
+e: ? f: ? g: ? h: D4 
 ========
 ...SSf..
 ..cde...

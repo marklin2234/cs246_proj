@@ -1,1 +1,1 @@
--link1 tests/link1 -link2 tests/link2
+-link1 tests/link1 -link2 tests/link2 -ability1 FFFFF -ability2 FFFFF

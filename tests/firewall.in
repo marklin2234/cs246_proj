@@ -9,4 +9,20 @@ move H u
 move h d
 move G u
 move h d
+ability 1 4 6
+abilities
+move G u
+move h d
+move G u
+move h d
+move A u
+move h l
+abilities
+ability 3 4 0
+move A u
+move a d
+move A u
+move a d
+move B u
+move a d
 

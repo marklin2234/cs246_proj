@@ -41,5 +41,5 @@ public:
   LinkType getLinkType() const;
   void setLinkType(LinkType linkType);
 
-  void moveLink(char dir, std::shared_ptr<Board> board, int nrows, int ncols);
+  bool moveLink(char dir, std::shared_ptr<Board> board, int nrows, int ncols);
 };

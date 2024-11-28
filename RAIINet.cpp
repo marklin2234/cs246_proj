@@ -135,8 +135,9 @@ void RAIINet::moveLink(char linkChar, char dir) {
     std::cout << "Error. Not your link, or already downloaded.\n";
     return;
   }
-  links[linkChar]->moveLink(dir, board_, nrows, ncols);
-  endTurn();
+  if (links[linkChar]->moveLink(dir, board_, nrows, ncols)) {
+    endTurn();
+  }
 }
 
 void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
