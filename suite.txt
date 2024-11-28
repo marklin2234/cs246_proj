@@ -1,5 +1,7 @@
-tests/basic
+tests/link
+tests/server
 tests/linkboost
 tests/firewall
 tests/download
-
+tests/polarize
+tests/scan

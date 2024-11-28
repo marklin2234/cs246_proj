@@ -18,7 +18,9 @@ private:
   std::unordered_map<PlayerId, Player, PlayerHash> players;
 
   std::pair<int, int> directionToVector(char dir) const;
-  void linkSetup(PlayerId player, const std::string &linkFile);
+  void linkOrderSetup(std::vector<std::string> &order,
+                      const std::string &linkFile);
+  void linkSetup(PlayerId player, const std::vector<std::string> &order);
   void abilitySetup(PlayerId player, const std::string &order = "LFDSP");
   void printPlayerInfo(PlayerId player) const;
   void endTurn();
