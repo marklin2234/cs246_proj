@@ -5,6 +5,7 @@
 #include "linkBoostAbility.hpp"
 #include "polarizeAbility.hpp"
 #include "scanAbility.hpp"
+#include "swapAbility.hpp"
 
 Player::Player(PlayerId id) : id_{id} {
   if (id == PlayerId::P1) {
@@ -58,6 +59,9 @@ void Player::addAbility(char c) {
     break;
   case 'S':
     abilities.emplace_back(std::make_unique<ScanAbility>(*this));
+    break;
+  case 'C':
+    abilities.emplace_back(std::make_unique<SwapAbility>(*this));
     break;
   }
 }

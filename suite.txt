@@ -5,3 +5,4 @@ tests/firewall
 tests/download
 tests/polarize
 tests/scan
+tests/swap

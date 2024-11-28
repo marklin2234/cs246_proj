@@ -7,6 +7,7 @@
 #include "polarizeAbility.hpp"
 #include "scanAbility.hpp"
 #include "serverPort.hpp"
+#include "swapAbility.hpp"
 #include <fstream>
 #include <memory>
 #include <random>
@@ -173,6 +174,10 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   } else if (dynamic_cast<ScanAbility *>(abilities[N].get())) {
     char linkChar = params[0][0];
     abilityParams = std::make_shared<ScanAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<SwapAbility *>(abilities[N].get())) {
+    char linkChar1 = params[0][0], linkChar2 = params[1][0];
+    abilityParams =
+        std::make_shared<SwapAbilityParams>(links[linkChar1], links[linkChar2]);
   }
   if (abilities[N]->use(abilityParams)) {
     abilities[N]->setUsed();

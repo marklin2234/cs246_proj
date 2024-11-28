@@ -40,3 +40,9 @@ public:
   std::shared_ptr<Link> link_;
   ScanAbilityParams(std::shared_ptr<Link> link);
 };
+
+class SwapAbilityParams : public AbilityParams {
+public:
+  std::shared_ptr<Link> link1_, link2_;
+  SwapAbilityParams(std::shared_ptr<Link> link1, std::shared_ptr<Link> link2);
+};
