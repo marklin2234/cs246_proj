@@ -174,6 +174,7 @@ bool RAIINet::parseAbilityInput(
                                                               players[turn]);
     } catch (std::exception &err) {
       std::cout << "Error. Invalid number.\n";
+      return false;
     }
   } else if (dynamic_cast<DownloadAbility *>(abilities[N].get())) {
     if (params.size() != 1) {
