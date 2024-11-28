@@ -24,7 +24,9 @@ char RAIINet::getState(int row, int col) const {
   return cell->displayChar();
 }
 
-void RAIINet::endGame() {}
+void RAIINet::endGame() { isGameOver = true; }
+
+bool RAIINet::getIsGameOver() const { return isGameOver; }
 
 void RAIINet::setup(int argc, char **argv) {
   std::string command;
@@ -106,8 +108,21 @@ void RAIINet::abilitySetup(PlayerId pid, const std::string &order) {
 void RAIINet::endTurn() {
   int next = static_cast<int>(turn);
   next = (next + 1) % numPlayers;
-
   turn = static_cast<PlayerId>(next);
+  abilityUsed = false;
+  displayBoard();
+
+  // Check for winner
+  auto &p1 = players[PlayerId::P1];
+  auto &p2 = players[PlayerId::P2];
+  if (p1.getNumDataDownloaded() == 4 || p2.getNumVirusDownloaded() == 4) {
+    std::cout << "Player 1 has won!\n";
+    endGame();
+  } else if (p1.getNumVirusDownloaded() == 4 ||
+             p2.getNumDataDownloaded() == 4) {
+    std::cout << "Player 2 has won!\n";
+    endGame();
+  }
 }
 
 void RAIINet::moveLink(char linkChar, char dir) {
@@ -129,6 +144,10 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   auto &abilities = player.getAbilities();
   N--;
 
+  if (abilityUsed) {
+    std::cout << "Error. Already used ability this turn.\n";
+    return;
+  }
   if (abilities[N]->isUsed()) {
     std::cout << "Error. Ability already used.\n";
     return; // TODO: add error (ability already used)
@@ -157,6 +176,7 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   if (abilities[N]->use(abilityParams)) {
     abilities[N]->setUsed();
     player.useAbility();
+    abilityUsed = true;
   }
 }
 

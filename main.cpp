@@ -58,6 +58,10 @@ bool run(std::istream &in, RAIINet &game) {
     } else if (command == "quit") {
       return false;
     }
+
+    if (game.getIsGameOver()) {
+      return false;
+    }
   }
   return true;
 }

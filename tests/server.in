@@ -12,14 +12,12 @@ move h d
 move A u
 move h d
 move A u
-board
 move h l
 move A u
 move h l
 move A u
 move B u
 move h l
-board
 move B u
 move g d
 move B u
@@ -40,5 +38,4 @@ move B r
 move g d
 move C u
 move g d
-board
 
