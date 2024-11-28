@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include "downloadAbility.hpp"
 #include "firewallAbility.hpp"
 #include "link.hpp"
 #include "linkBoostAbility.hpp"
@@ -42,10 +43,14 @@ int Player::getNumVirusDownloaded() const { return numVirusDownloaded; }
 void Player::addAbility(char c) {
   switch (c) {
   case 'L':
-    abilities.emplace_back(std::make_unique<LinkBoostAbility>(id_));
+    abilities.emplace_back(std::make_unique<LinkBoostAbility>(*this));
     break;
   case 'F':
-    abilities.emplace_back(std::make_unique<FirewallAbility>(id_));
+    abilities.emplace_back(std::make_unique<FirewallAbility>(*this));
+    break;
+  case 'D':
+    abilities.emplace_back(std::make_unique<DownloadAbility>(*this));
+    break;
   }
 }
 

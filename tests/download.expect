@@ -1,61 +1,41 @@
 LA FA DA 
-LA FU DA 
-LA FA DA 
-LA FU DA 
+LA FA DU 
 Player 1:
+Downloaded: 0D, 1V
+Abilities: 4
+a: V1 b: V2 c: V3 d: V4
+e: D1 f: D2 g: D3 h: D4 
+========
+abcSSfgh
+...de...
+........
+........
+........
+........
+...DE...
+ABCSSFG.
+========
+Player 2:
 Downloaded: 0D, 0V
+Abilities: 5
+A: D1 B: D2 C: D3 D: D4
+E: V1 F: V2 G: V3 H: V4 
+LA FA DA 
+LA FA DU 
+Player 1:
+Downloaded: 0D, 1V
 Abilities: 4
 a: V1 b: V2 c: V3 d: V4
 e: D1 f: D2 g: D3 h: D4 
 ========
 .bcSSfgh
-a..de..W
+...de...
 ........
 ........
 ........
 ........
-...DE..M
+...DE...
 ABCSSFG.
-========
-Player 2:
-Downloaded: 0D, 1V
-Abilities: 4
-A: D1 B: D2 C: D3 D: D4
-E: V1 F: V2 G: V3 H: V4 
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: V1 b: V2 c: V3 d: V4
-e: D1 f: D2 g: D3 h: D4 
-========
-.bcSSfg.
-a..de..h
-........
-........
-........
-........
-...DE.GM
-ABCSSF..
-========
-Player 2:
-Downloaded: 0D, 1V
-Abilities: 4
-A: D1 B: D2 C: D3 D: D4
-E: V1 F: V2 G: V3 H: V4 
-Player 1:
-Downloaded: 0D, 0V
-Abilities: 4
-a: V1 b: V2 c: V3 d: V4
-e: D1 f: D2 g: D3 h: D4 
-========
-.bcSSfg.
-a..de..W
-.......h
-........
-........
-........
-...DE.GM
-ABCSSF..
 ========
 Player 2:
 Downloaded: 0D, 1V

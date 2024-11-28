@@ -2,6 +2,7 @@
 #include "abilityParams.hpp"
 #include "board.hpp"
 #include "data.hpp"
+#include "downloadAbility.hpp"
 #include "firewallAbility.hpp"
 #include "linkBoostAbility.hpp"
 #include "serverPort.hpp"
@@ -165,6 +166,9 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
     int row = stoi(params[0]), col = stoi(params[1]);
     abilityParams = std::make_shared<FirewallAbilityParams>(row, col, board_,
                                                             players[turn]);
+  } else if (dynamic_cast<DownloadAbility *>(abilities[N].get())) {
+    char linkChar = params[0][0];
+    abilityParams = std::make_shared<DownloadAbilityParams>(links[linkChar]);
   }
   abilities[N]->use(abilityParams);
   abilities[N]->setUsed();

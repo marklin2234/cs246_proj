@@ -2,9 +2,9 @@
 
 #include "ability.hpp"
 
-class LinkBoostAbility : public Ability {
+class DownloadAbility : public Ability {
 public:
-  LinkBoostAbility(Player &player);
-  char displayChar() const override;
+  DownloadAbility(Player &player);
   void use(const std::shared_ptr<AbilityParams> params) override;
+  char displayChar() const override;
 };

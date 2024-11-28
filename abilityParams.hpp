@@ -22,3 +22,9 @@ public:
   FirewallAbilityParams(int row, int col, std::shared_ptr<Board> &board,
                         Player &player);
 };
+
+class DownloadAbilityParams : public AbilityParams {
+public:
+  std::shared_ptr<Link> link_;
+  DownloadAbilityParams(std::shared_ptr<Link> link);
+};

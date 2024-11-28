@@ -4,7 +4,7 @@
 
 class FirewallAbility : public Ability {
 public:
-  FirewallAbility(PlayerId player);
+  FirewallAbility(Player &player);
   char displayChar() const override;
   void use(const std::shared_ptr<AbilityParams> params) override;
 };
