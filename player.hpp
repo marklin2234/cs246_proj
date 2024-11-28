@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ability.hpp"
-#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 class Link;
@@ -19,7 +19,7 @@ private:
   PlayerId id_;
   std::vector<char> linkChars;
   std::vector<std::unique_ptr<Ability>> abilities;
-  std::unordered_map<char, std::shared_ptr<Link>> seen;
+  std::unordered_set<char> seen;
 
 public:
   Player() = default;
@@ -38,6 +38,6 @@ public:
   const std::vector<std::unique_ptr<Ability>> &getAbilities() const;
   int getNumAbilities() const;
   void useAbility();
-  void addSeen(std::shared_ptr<Link> link);
-  const std::unordered_map<char, std::shared_ptr<Link>> getSeen() const;
+  void addSeen(char linkChar);
+  const std::unordered_set<char> &getSeen() const;
 };

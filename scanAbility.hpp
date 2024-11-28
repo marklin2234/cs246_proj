@@ -2,9 +2,9 @@
 
 #include "ability.hpp"
 
-class DownloadAbility : public Ability {
+class ScanAbility : public Ability {
 public:
-  DownloadAbility(Player &player);
+  ScanAbility(Player &player);
   bool use(const std::shared_ptr<AbilityParams> params) override;
   char displayChar() const override;
 };

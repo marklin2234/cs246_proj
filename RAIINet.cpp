@@ -5,6 +5,7 @@
 #include "firewallAbility.hpp"
 #include "linkBoostAbility.hpp"
 #include "polarizeAbility.hpp"
+#include "scanAbility.hpp"
 #include "serverPort.hpp"
 #include <fstream>
 #include <memory>
@@ -102,7 +103,8 @@ void RAIINet::abilitySetup(PlayerId pid, const std::string &order) {
 }
 
 void RAIINet::printPlayerInfo(PlayerId pid) const {
-  auto &player = players.at(pid);
+  const auto &player = players.at(pid);
+  const auto &seenLinks = players.at(turn).getSeen();
   out << "Player " << static_cast<int>(pid) + 1 << ":\n";
   out << "Downloaded: " << std::to_string(player.getNumDataDownloaded())
       << "D, " << std::to_string(player.getNumVirusDownloaded()) << "V";
@@ -112,7 +114,13 @@ void RAIINet::printPlayerInfo(PlayerId pid) const {
   int i = 0;
   // TODO: Hide P2/P1 depending on perspective
   for (const auto c : player.getLinkChars()) {
-    out << c << ": " << links.at(c)->typeChar() << links.at(c)->getStrength();
+    out << c << ": ";
+    if (player.getPlayerId() == turn ||
+        std::find(seenLinks.begin(), seenLinks.end(), c) != seenLinks.end()) {
+      out << links.at(c)->typeChar() << links.at(c)->getStrength();
+    } else {
+      out << "?";
+    }
     out << ((i == 3) ? "\n" : " ");
     i++;
   }
@@ -166,10 +174,14 @@ void RAIINet::useAbility(int N, const std::vector<std::string> &params) {
   } else if (dynamic_cast<PolarizeAbility *>(abilities[N].get())) {
     char linkChar = params[0][0];
     abilityParams = std::make_shared<PolarizeAbilityParams>(links[linkChar]);
+  } else if (dynamic_cast<ScanAbility *>(abilities[N].get())) {
+    char linkChar = params[0][0];
+    abilityParams = std::make_shared<ScanAbilityParams>(links[linkChar]);
   }
-  abilities[N]->use(abilityParams);
-  abilities[N]->setUsed();
-  player.useAbility();
+  if (abilities[N]->use(abilityParams)) {
+    abilities[N]->setUsed();
+    player.useAbility();
+  }
 }
 
 void RAIINet::displayAbilities() const {

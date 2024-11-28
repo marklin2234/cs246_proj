@@ -4,6 +4,7 @@
 #include "link.hpp"
 #include "linkBoostAbility.hpp"
 #include "polarizeAbility.hpp"
+#include "scanAbility.hpp"
 
 Player::Player(PlayerId id) : id_{id} {
   if (id == PlayerId::P1) {
@@ -54,6 +55,10 @@ void Player::addAbility(char c) {
     break;
   case 'P':
     abilities.emplace_back(std::make_unique<PolarizeAbility>(*this));
+    break;
+  case 'S':
+    abilities.emplace_back(std::make_unique<ScanAbility>(*this));
+    break;
   }
 }
 
@@ -69,10 +74,6 @@ int Player::getNumAbilities() const { return numUnusedAbilities; }
 
 void Player::useAbility() { numUnusedAbilities--; }
 
-void Player::addSeen(std::shared_ptr<Link> link) {
-  seen[link->displayChar()] = link;
-}
+void Player::addSeen(char linkChar) { seen.insert(linkChar); }
 
-const std::unordered_map<char, std::shared_ptr<Link>> Player::getSeen() const {
-  return seen;
-}
+const std::unordered_set<char> &Player::getSeen() const { return seen; }

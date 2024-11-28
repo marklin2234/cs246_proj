@@ -15,3 +15,6 @@ DownloadAbilityParams::DownloadAbilityParams(std::shared_ptr<Link> link)
 
 PolarizeAbilityParams::PolarizeAbilityParams(std::shared_ptr<Link> link)
     : link_{link} {}
+
+ScanAbilityParams::ScanAbilityParams(std::shared_ptr<Link> link)
+    : link_{link} {}

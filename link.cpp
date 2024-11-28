@@ -108,7 +108,7 @@ void Link::moveLink(char dir, std::shared_ptr<Board> board, int nrows,
   } else if (auto firewall = board->getFirewall(r, c)) {
     auto &player = firewall->get()->getPlayer();
     if (player.getPlayerId() != getPlayer().getPlayerId()) {
-      player.addSeen(std::static_pointer_cast<Link>(shared_from_this()));
+      player.addSeen(displayChar());
 
       if (type_ == LinkType::Virus) {
         getPlayer().addDownload(

@@ -34,3 +34,9 @@ public:
   std::shared_ptr<Link> link_;
   PolarizeAbilityParams(std::shared_ptr<Link> link);
 };
+
+class ScanAbilityParams : public AbilityParams {
+public:
+  std::shared_ptr<Link> link_;
+  ScanAbilityParams(std::shared_ptr<Link> link);
+};

@@ -4,7 +4,7 @@
 
 PolarizeAbility::PolarizeAbility(Player &player) : Ability{player} {}
 
-void PolarizeAbility::use(const std::shared_ptr<AbilityParams> params) {
+bool PolarizeAbility::use(const std::shared_ptr<AbilityParams> params) {
   auto p = static_pointer_cast<PolarizeAbilityParams>(params);
 
   const auto &[link] = *p;
@@ -13,6 +13,7 @@ void PolarizeAbility::use(const std::shared_ptr<AbilityParams> params) {
   } else if (link->getLinkType() == LinkType::Data) {
     link->setLinkType(LinkType::Virus);
   }
+  return true;
 }
 
 char PolarizeAbility::displayChar() const { return 'P'; }
