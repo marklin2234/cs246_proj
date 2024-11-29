@@ -12,10 +12,11 @@ private:
   static constexpr int BUFFER_SIZE = 10;
   const RAIINet &game_;
   std::unique_ptr<Xwindow> win;
+  std::vector<std::vector<char>> previousState;
 
 public:
   GraphicObserver(const RAIINet &game);
   void notify() override;
   void printPlayerInfo(PlayerId pid) const;
-  void printGameState() const;
+  void printGameState();
 };

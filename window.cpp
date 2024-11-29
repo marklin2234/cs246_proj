@@ -31,10 +31,11 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
   // Set up colours.
   XColor xcolour;
   Colormap cmap;
-  char color_vals[6][10] = {"white", "black", "red", "green", "blue", "yellow"};
+  char color_vals[8][10] = {"white", "black",  "red",     "green",
+                            "blue",  "yellow", "#8B0000", "#023020"};
 
   cmap = DefaultColormap(d, DefaultScreen(d));
-  for (int i = 0; i < 6; ++i) {
+  for (int i = 0; i < 8; ++i) {
     XParseColor(d, cmap, color_vals[i], &xcolour);
     XAllocColor(d, cmap, &xcolour);
     colours[i] = xcolour.pixel;

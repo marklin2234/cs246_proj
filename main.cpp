@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
 }
 
 bool run(std::istream &in, RAIINet &game) {
+  game.displayBoard();
   std::string command;
   while (in >> command) {
     if (command == "move") {

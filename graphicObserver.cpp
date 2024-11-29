@@ -7,13 +7,19 @@ GraphicObserver::GraphicObserver(const RAIINet &game)
     : game_{game},
       win{std::make_unique<Xwindow>(
           game.ncols * SQUARE_SIZE,
-          game.nrows * SQUARE_SIZE + 2 * PLAYER_INFO_SIZE + 2 * BUFFER_SIZE)} {}
+          game.nrows * SQUARE_SIZE + 2 * PLAYER_INFO_SIZE + 2 * BUFFER_SIZE)},
+      previousState(game.nrows, std::vector<char>(game.ncols, ' ')) {
+  win->fillRectangle(0, 0, game.ncols * SQUARE_SIZE,
+                     game.nrows * SQUARE_SIZE + 2 * PLAYER_INFO_SIZE +
+                         2 * BUFFER_SIZE,
+                     Xwindow::White);
+}
 
 void GraphicObserver::notify() {
-  int nrows = game_.nrows, ncols = game_.ncols;
-  win->fillRectangle(0, 0, ncols * SQUARE_SIZE,
-                     nrows * SQUARE_SIZE + 2 * PLAYER_INFO_SIZE +
-                         2 * BUFFER_SIZE,
+  win->fillRectangle(0, 0, game_.ncols * PLAYER_INFO_SIZE, PLAYER_INFO_SIZE,
+                     Xwindow::White);
+  win->fillRectangle(0, win->getHeight() - PLAYER_INFO_SIZE,
+                     game_.ncols * PLAYER_INFO_SIZE, PLAYER_INFO_SIZE,
                      Xwindow::White);
   printPlayerInfo(PlayerId::P1);
   printGameState();
@@ -64,7 +70,7 @@ void GraphicObserver::printPlayerInfo(PlayerId pid) const {
   win->drawString(x, y, ss.str());
 }
 
-void GraphicObserver::printGameState() const {
+void GraphicObserver::printGameState() {
   int nrows = game_.nrows, ncols = game_.ncols;
   const auto &links = game_.links;
   const auto turn = game_.turn;
@@ -72,24 +78,36 @@ void GraphicObserver::printGameState() const {
   for (int i = 0; i < nrows; i++) {
     for (int j = 0; j < ncols; j++) {
       auto state = game_.getState(i, j);
-      int colour = Xwindow::White;
-      if (links.find(state) != links.end()) {
-        if (links.at(state)->getPlayer().getPlayerId() != turn &&
-            seen.find(state) == seen.end()) {
-          colour = Xwindow::Black;
-        } else if (links.at(state)->getLinkType() == LinkType::Virus) {
-          colour = Xwindow::Red;
-        } else {
-          colour = Xwindow::Green;
+      if (links.find(state) != links.end() || state != previousState[i][j]) {
+        int colour = Xwindow::White;
+        if (links.find(state) != links.end()) {
+          const auto &link = links.at(state);
+          if (link->getPlayer().getPlayerId() != turn &&
+              seen.find(state) == seen.end()) {
+            colour = Xwindow::Black;
+          } else if (link->getPlayer().getPlayerId() != turn &&
+                     seen.find(state) != seen.end() &&
+                     link->getLinkType() == LinkType::Virus) {
+            colour = Xwindow::DarkRed;
+          } else if (link->getPlayer().getPlayerId() != turn &&
+                     seen.find(state) != seen.end() &&
+                     link->getLinkType() == LinkType::Data) {
+            colour = Xwindow::DarkGreen;
+          } else if (link->getLinkType() == LinkType::Virus) {
+            colour = Xwindow::Red;
+          } else {
+            colour = Xwindow::Green;
+          }
+        } else if (state == 'W' || state == 'M') {
+          colour = Xwindow::Blue;
+        } else if (state == 'S') {
+          colour = Xwindow::Yellow;
         }
-      } else if (state == 'W' || state == 'M') {
-        colour = Xwindow::Blue;
-      } else if (state == 'S') {
-        colour = Xwindow::Yellow;
+        win->fillRectangle(j * SQUARE_SIZE,
+                           i * SQUARE_SIZE + PLAYER_INFO_SIZE + BUFFER_SIZE,
+                           SQUARE_SIZE, SQUARE_SIZE, colour);
       }
-      win->fillRectangle(j * SQUARE_SIZE,
-                         i * SQUARE_SIZE + PLAYER_INFO_SIZE + BUFFER_SIZE,
-                         SQUARE_SIZE, SQUARE_SIZE, colour);
+      previousState[i][j] = state;
     }
   }
 }

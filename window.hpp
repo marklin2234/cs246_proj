@@ -15,7 +15,16 @@ public:
           int height = 500); // Constructor; displays the window.
   ~Xwindow();                // Destructor; destroys the window.
 
-  enum { White = 0, Black, Red, Green, Blue, Yellow }; // Available colours.
+  enum {
+    White = 0,
+    Black,
+    Red,
+    Green,
+    Blue,
+    Yellow,
+    DarkRed,
+    DarkGreen
+  }; // Available colours.
 
   int getWidth() const;
   int getHeight() const;

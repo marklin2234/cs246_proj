@@ -1,7 +1,6 @@
 #pragma once
 
 #include "board.hpp"
-#include <string>
 
 class Blank : public Board {
 public:
