@@ -1,6 +1,7 @@
 #pragma once
 
 #include "observer.hpp"
+#include <memory>
 #include <vector>
 
 class Subject {

@@ -38,8 +38,7 @@ void TextObserver::printPlayerInfo(PlayerId pid) const {
   int i = 0;
   for (const auto c : player.getLinkChars()) {
     out << c << ": ";
-    if (player.getPlayerId() == turn ||
-        std::find(seenLinks.begin(), seenLinks.end(), c) != seenLinks.end()) {
+    if (player.getPlayerId() == turn || seenLinks.find(c) != seenLinks.end()) {
       out << links.at(c)->typeChar() << links.at(c)->getStrength();
     } else {
       out << "?";

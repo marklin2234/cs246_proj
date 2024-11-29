@@ -1,7 +1,7 @@
 CXX = clang++
 CXXFLAGS = -std=c++20 -g -Wall
 
-TARGET = RAIINet
+TARGET = raiinet
 
 SOURCES = $(wildcard *.cpp)
 OBJS = $(patsubst %.cpp, %.o,$(SOURCES))

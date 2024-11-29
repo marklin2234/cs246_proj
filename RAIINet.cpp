@@ -10,6 +10,7 @@
 #include "scanAbility.hpp"
 #include "serverPort.hpp"
 #include "swapAbility.hpp"
+#include <algorithm>
 #include <fstream>
 #include <memory>
 #include <random>
