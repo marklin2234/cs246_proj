@@ -15,10 +15,10 @@ int main(int argc, char **argv) {
   RAIINet game{board};
 
   game.setup(argc, argv);
-  game.attach(new TextObserver(game));
+  game.attach(std::make_unique<TextObserver>(game));
   for (int i = 1; i < argc; i++) {
     if (std::string(argv[i]) == "-graphics") {
-      game.attach(new GraphicObserver(game));
+      game.attach(std::make_unique<GraphicObserver>(game));
     }
   }
   run(std::cin, game);
